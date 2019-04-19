@@ -17,7 +17,7 @@ let leftPressed = false;
 
 // Brick setup
 let brickRowCount = 5;
-let brickColumnCount = 3;
+let brickColumnCount = 4;
 let brickWidth = 75;
 let brickHeight = 20;
 let brickPadding = 10;
@@ -36,6 +36,14 @@ for(let c=0; c<brickColumnCount; c++) {
 // Controls
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
+
+function mouseMoveHandler(e) {
+  let relativeX = e.clientX - canvas.offsetLeft;
+  if(relativeX > 0 && relativeX < canvas.width) {
+    paddleX = relativeX - paddleWidth/2;
+  }
+}
 
 function keyDownHandler(e) {
   if(e.keyCode == 39) {
@@ -64,6 +72,11 @@ function collisionDetection() {
           dy = -dy;
           b.status = 0;
           score++;
+          if(score == brickRowCount*brickColumnCount) {
+            alert("Winner, winner, chicken dinner!");
+            delayRestart();
+            clearInterval(interval);
+          }
         }
       }
     }
@@ -134,6 +147,7 @@ function draw() {
     }
     else {
       delayRestart();
+      clearInterval(interval);
     }
   }
 
