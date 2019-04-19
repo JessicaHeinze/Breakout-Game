@@ -6,6 +6,7 @@ let x = canvas.width/2;
 let y = canvas.height-30;
 let dx = 2;
 let dy = -2;
+let score = 0;
 
 // Paddles
 let paddleHeight = 10;
@@ -62,10 +63,21 @@ function collisionDetection() {
         if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
           dy = -dy;
           b.status = 0;
+          score++;
         }
       }
     }
   }
+}
+
+function drawScore() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "#0095DD"
+  ctx.fillText("Score: "+score, 8, 20);
+}
+
+function delayRestart() {
+  setTimeout(function(){ document.location.reload(); }, 500);
 }
 
 // Render game objects
@@ -107,6 +119,7 @@ function draw() {
   drawBricks();
   drawBall();
   drawPaddle();
+  drawScore();
   collisionDetection();
 
   if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
@@ -120,8 +133,7 @@ function draw() {
       dy = -dy;
     }
     else {
-      alert("GAME OVER");
-      document.location.reload();
+      delayRestart();
     }
   }
 
