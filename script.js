@@ -85,7 +85,7 @@ function collisionDetection() {
 
 function drawScore() {
   ctx.font = "16px Arial";
-  ctx.fillStyle = "#0095DD"
+  ctx.fillStyle = "#d1bccf"
   ctx.fillText("Score: "+score, 8, 20);
 }
 
@@ -97,14 +97,14 @@ function delayRestart() {
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-  ctx.fillStyle = "#fae54a";
+  ctx.fillStyle = "#d1bccf";
   ctx.fill();
   ctx.closePath();
 }
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = "#1eca1e";
+  ctx.fillStyle = "#d1bccf";
   ctx.fill();
   ctx.closePath();
 }
@@ -118,7 +118,7 @@ function drawBricks() {
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = "#FFFFFF";
+        ctx.fillStyle = "#d1bccf";
         ctx.fill();
         ctx.closePath();
       }
@@ -147,7 +147,6 @@ function draw() {
     }
     else {
       delayRestart();
-      clearInterval(interval);
     }
   }
 
